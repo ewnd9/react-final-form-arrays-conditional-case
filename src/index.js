@@ -67,20 +67,26 @@ const App = () => {
                 {({fields}) =>
                   fields.map((name, index) =>
                     tabIndex !== index ? null : (
-                      <div key={name}>
+                      <div key={fields.value[index].id}>
                         <Field name={`${name}.id`}>
                           {({input: {name, value}}) => <label name={name}>Cust. #{value}</label>}
                         </Field>
-                        <Field name={`${name}.firstName`} component="input" placeholder="First Name" />
-                        <input
-                          type="text"
-                          value={index}
-                          onChange={({target: {value}}) => {
-                            console.log('here');
-                            form.mutators.move('customers', index, value);
-                            console.log(value);
-                          }}
-                        />
+                        <div>
+                          <label>name</label>
+                          <Field name={`${name}.firstName`} component="input" placeholder="First Name" />
+                        </div>
+                        <div>
+                          <label>order</label>
+                          <input
+                            type="text"
+                            value={index}
+                            onChange={({target: {value}}) => {
+                              console.log('here');
+                              form.mutators.move('customers', index, value);
+                              console.log(value);
+                            }}
+                          />
+                        </div>
                         <span onClick={() => fields.remove(index)} style={{cursor: 'pointer'}}>
                           ❌
                         </span>
